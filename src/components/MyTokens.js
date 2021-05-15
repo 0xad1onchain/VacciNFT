@@ -15,7 +15,7 @@ import { CertificateDetailsPaths } from "../constants";
 // import covacContract from './img/covacContract@2x.png'
 // import aditya from './img/aditya@2x.png'
 // import anurag from './img/anurag@2x.png'
-// import hemant from './img/hemant@2x.png'
+import banner from './img/about-banner@2x.png'
 
 export const CERTIFICATE_FILE = "certificate.json";
 
@@ -313,9 +313,65 @@ class App extends Component {
   render() {
     return (
       <div>
-        <div className="container-fluid mt-5 ">
+        < div className="container-fluid mt-5 ">
+          <div className="row made-with-love row got-covid-shot col-lg-12">
+            <h3 className="sub-title">Got Your Covid-19 Shot?</h3>
+            <h2 className="title primary-title latest-token-claimed">
+              Claim The World’s First Certificate-Based NFT
+            </h2>
+          </div>
+          <div className="row col-lg-12">
+            <img src={banner} className="about-hero-img"></img>
+          </div>
+          <div className="row col-lg-12 about-para">
+            <p className="para-content">
+              Non fungible token celebrate the power of eternity and present us with a way to digitally store our most beloved priceless possessions.  An NFT is a digital asset that represents real-world objects like art, music, in-game items and videos. They are bought and sold online, frequently with cryptocurrency, and they are generally encoded with the same underlying software as many cryptos.
+          </p>
+            <p className="para-content">
+              The COVID-19 pandemic has led to a dramatic loss of human life worldwide and presented an unprecedented challenge to public health, food systems and the world of work. The economic and social disruption caused by the pandemic has been devastating: tens of millions of people are at risk of falling into extreme poverty. Despite all the challenges the pandemic has presented, many scientific groups have come out with vaccines that will help restore normalcy in our lives.
+          </p>
+            <p className="para-content">
+              Covac celebrates the brave fight humanity has put against this deadly virus and wants to store it for eternity. We want to thank every single person who has done their bit by helping as a frontline-worker, donating or staying at home to avoid the spread of virus and present them with these awesome NFT tokens which they can mint by uploading their pdf certificate of their vaccine shot.
+          </p>
+          </div>
+          <div className="row col-lg-12 made-with-love">
+            <h2 className="title looks-like-no-vaccine">
+              Looks like you have not claimed any tokens yet :(
+            </h2>
+            <h3 className="sub-title register-content">Regester for your vaccine shot on <a href="https://www.cowin.gov.in/home">https://www.cowin.gov.in</a></h3>
+            <h3 className="sub-title">Got your vaccine shot?</h3>
+            <h2 className="title">
+              Claim your tokens in 1 simple step!
+            </h2>
+          </div>
+          <div className="row col-lg-12 choose-file-button">
+            {/* <input type="file" onChange={this.onFileChange} /> */}
+            <input type="file" name="file" id="file" class="inputfile" onChange={this.onFileChange}/>
+            <label for="file">Choose a file</label>
+
+          </div>
+          <div className="row col-lg-12 about-buttons">
+            <button onClick={this.onFileUpload} class="upload-button">Upload!</button>
+          </div>
+          <div className="row col-lg-12 about-buttons">
+          <button
+            onClick={this.mint}
+            className="btn btn-block btn-primary"
+            // disabled={!this.state.verified}
+            disabled={true}
+            className="mint-button"
+          >
+            Mint
+          </button>
+          </div>
+          <div className="row col-lg-12">
+          <canvas id="cropped-qr"></canvas>
+            <img src={this.state.qr_image} />
+            <img src={this.state.qr_image} />
+            <canvas display="none" id="the-canvas"></canvas>
+          </div>
           {/* old */}
-          <div className="row">
+          {/* <div className="row">
             <main role="main" className="col-lg-12 d-flex text-center">
               <div className="content mr-auto ml-auto">
                 <h1>Issue Token</h1>
@@ -339,8 +395,9 @@ class App extends Component {
           </div>
           <hr />
         </div>
-        <canvas display="none" id="the-canvas"></canvas>
-      </div>
+        <canvas display="none" id="the-canvas"></canvas> */}
+      </ div>
+      </ div>
     );
   }
 }

@@ -104,11 +104,11 @@ class Home extends Component {
                 Covac is a simple platform build for a regular person to easily
                 mint their own NFT tokens after they get their vaccine shots.
               </p>
-              <a href="#" className="button-primary">
-                <Link to="/tokens">
+              {/* <a href="#" className="button-primary"> */}
+                <Link to="/tokens" className="button-primary">
                   <span>Claim my tokens now</span>
                 </Link>
-              </a>
+              {/* </a> */}
             </div>
           </div>
           <div className="row made-with-love row made-with-love-v2">
@@ -156,9 +156,11 @@ class Home extends Component {
                 token (NFT) in one simple step if they have got their vaccine
                 shot!
               </p>
-              <a href="#" className="button-secondary-outline">
+              {/* <a href="#" className="button-secondary-outline"> */}
+              <Link to="/tokens" className="button-secondary-outline">
                 <span>Claim my tokens</span>
-              </a>
+                </Link>
+              {/* </a> */}
             </div>
             <div class="col-md-6 mb-6 what-is-covac">
               <img src={covacContract}></img>
