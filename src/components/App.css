@@ -1,0 +1,246 @@
+/* Styles go here */
+
+.token {
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* .row1 {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.column1 {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+} */
+.button-primary{
+  background:#F65549;
+  color:white;
+  padding:18px 78px;
+  border: solid 1px #F65549;
+  border-radius:45px;
+}
+.button-primary a{
+  text-decoration: none;
+}
+.button-primary a:hover{
+  text-decoration: none;
+}
+
+.button-primary:hover{
+  background:white;
+  color:#F65549;
+}
+.button-secondary-outline{
+  background:#0D0D0D;
+  color:#FDB801;
+  padding:18px 78px;
+  border: solid 1px #FDB801;
+  border-radius:45px;
+  width: 50%;
+
+}
+.button-secondary-outline a{
+  text-decoration: none;
+}
+.button-secondary-outline a:hover{
+  text-decoration: none;
+}
+
+.button-secondary-outline:hover{
+  background:#FDB801;
+  color:white;
+}
+
+.title{
+  font-size: 68px;
+  font-weight: 500;
+}
+.teammate-name{
+  font-size: 30px;
+  font-weight: 400;
+  color:#F65549;
+
+}
+.sub-title{
+  font-size: 40px;
+  font-weight: 500;
+}
+.email-white a{
+  font-size: 68px;
+  font-weight: 500;
+  color:white;
+  text-decoration: underline;
+}
+.white-substitle{
+  color:white;
+}
+
+.para-content{
+  font-size: 20px;
+  font-weight: 300;
+}
+.para-content-white{
+  color:white;
+}
+
+.primary-title{
+  color: #F65549;
+}
+.white-title{
+  color: white;
+}
+.secondary-title{
+  color: #FDB801;
+}
+
+.made-with-love{
+  flex-direction: column;
+  align-items: center;
+}
+
+.made-with-love-v2{
+  margin-top:-130px;
+}
+
+.center-button{
+  display:flex;
+  justify-content: center;
+}
+
+.dark-back{
+  background: #0D0D0D;
+  height:930px;
+}
+.what-is-covac{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.footer-wrapper{
+  background:#F65549;
+  height:410px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.in-grid-375{
+  padding: 0 375px;
+}
+
+.see-all{
+  margin-bottom: 169px;
+  margin-top: 39px;
+}
+
+.latest-token-claimed{
+  margin-bottom:80px;
+}
+
+.nft-tokens-home{
+  padding: 50px;
+}
+
+.team-image{
+  justify-content: flex-end;
+  display: flex;
+}
+
+.in-grid-550{
+  padding: 0 550px;
+  margin-bottom:71px;
+}
+
+.teammate-content{
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  padding:45px;
+}
+
+.meet-the-team{
+  margin-top: 135px;
+  margin-bottom: 95px;
+}
+
+.team-wrapper{
+  padding-bottom: 79px;
+}
+
+.container-fluid{
+  padding-left:0;
+  padding-right:0;
+}
+
+.lower-footer-wrapper{
+  background:#0D0D0D;
+  text-align: center;
+  height:85px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.lower-footer-wrapper p{
+  margin-bottom: 0;
+}
+
+.home-banner-wrapper{
+  background-image: url('./img/home-banner-back@2x.png');
+  background-repeat: no-repeat;
+  height:1138px;
+  margin-top: -163px;
+}
+
+.navbar-nav{
+  flex-direction: row;
+  background: transparent;
+}
+
+.navbar-nav li{
+  padding-right: 30px;
+  padding-top:16px;
+}
+
+.navbar-nav li a{
+  color: #0D0D0D;
+}
+
+.banner-left{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.banner-left img{
+  width: 800px;
+}
+
+.banner-right{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-items: center; */
+}
+
+.banner-right .para-content{
+  width: 470px;
+}
+
+.banner-right a{
+  width: 312px;
+}
+
+.navbar-brand{
+  font-size:70px;
+  padding-left:100px;
+}
