@@ -30,14 +30,14 @@ class Navbar extends Component {
       this.setState({ account: accounts[0] });
       console.log(accounts[0]);
     } else if (window.web3) {
-      const portis = new Portis(config.dappId, config.network);
-      const web3 = new Web3(portis.provider);
+      window.web3 = new Web3(window.web3.currentProvider);
       const accounts = await web3.eth.getAccounts();
       this.setState({ account: accounts[0] });
       console.log(accounts[0]);
     } else {
-      const portis = new Portis(config.dappId, config.network);
-      const web3 = new Web3(portis.provider);
+      window.alert(
+        "Non-Ethereum browser detected. You should consider trying MetaMask!"
+      );
     }
   }
 
