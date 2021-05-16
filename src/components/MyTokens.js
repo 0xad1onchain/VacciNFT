@@ -9,9 +9,9 @@ import JSZip from "jszip";
 import { scanImageData } from "zbar.wasm";
 import config from "./config.json";
 import { CertificateDetailsPaths } from "../constants";
-import {
-  FacebookShareButton,
-} from "react-share";
+// import {
+//   FacebookShareButton,
+// } from "react-share";
 
 // import Footer from './footer'
 // import homeBanner from './img/homebanner@2x.png'
@@ -65,9 +65,7 @@ class App extends Component {
   }
 
   async loadBlockchainData() {
-    const portis = new Portis(config.dappId, config.network, {
-      gasRelay: true,
-    });
+    const portis = new Portis(config.dappId, config.network);
     const web3 = new Web3(portis.provider);
     // Load account
     const accounts = await web3.eth.getAccounts();
@@ -89,7 +87,7 @@ class App extends Component {
         dose1: user.dose1hash,
         dose2: user.dose2hash,
       });
-      this.setState({colors:[]})
+      this.setState({ colors: [] });
       if (this.state.dose1 !== "") {
         const metadataBytes = await ipfs.cat(this.state.dose1);
         var metadataStr = new TextDecoder().decode(metadataBytes);
@@ -394,8 +392,12 @@ class App extends Component {
 
             {this.state.dose1 === "" || this.state.dose2 === "" ? (
               <div>
-                <h3 className="sub-title center-aligned">Got your vaccine shot?</h3>
-                <h2 className="title center-aligned">Claim your tokens in 1 simple step!</h2>
+                <h3 className="sub-title center-aligned">
+                  Got your vaccine shot?
+                </h3>
+                <h2 className="title center-aligned">
+                  Claim your tokens in 1 simple step!
+                </h2>
               </div>
             ) : (
               <div>
@@ -409,7 +411,10 @@ class App extends Component {
           <div className="row text-center in-grid-375">
             {this.state.colors.map((color, key) => {
               return (
-                <div key={key} className="col-md-6 mb-6 nft-tokens-home nft-tokens-about">
+                <div
+                  key={key}
+                  className="col-md-6 mb-6 nft-tokens-home nft-tokens-about"
+                >
                   {/* <div className="token" style={{ backgroundColor: color }}></div> */}
                   <div>
                     <img
