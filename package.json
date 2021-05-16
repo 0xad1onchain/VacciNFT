@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "description": "An Ethereum Marketplace",
   "author": "Anurag",
+  "engines" : { "node" : "12.6.1" },
+  "engineStrict" : true,
   "dependencies": {
     "@opengsn/gsn": "^2.1.0",
     "@openzeppelin/contracts": "^2.3.0",
