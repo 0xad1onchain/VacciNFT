@@ -27,7 +27,7 @@ class Home extends Component {
       contact: "",
       totalSupply: undefined,
       colors: [],
-      address: "",
+      address: Color.networks[config.networkId].address,
     };
   }
 
@@ -62,7 +62,7 @@ class Home extends Component {
       const abi = Color.abi;
       const address = networkData.address;
       const contract = new web3.eth.Contract(abi, address);
-      this.setState({ contract, address });
+      this.setState({ contract });
       const totalSupply = await contract.methods.totalSupply().call();
       this.setState({ totalSupply });
       // Load Colors

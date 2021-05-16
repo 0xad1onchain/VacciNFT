@@ -4,6 +4,7 @@
   "description": "An Ethereum Marketplace",
   "author": "Anurag",
   "dependencies": {
+    "@opengsn/gsn": "^2.1.0",
     "@openzeppelin/contracts": "^2.3.0",
     "@portis/web3": "^4.0.0",
     "@truffle/hdwallet-provider": "^1.4.0",
