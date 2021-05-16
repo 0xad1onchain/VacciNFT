@@ -9,6 +9,9 @@ import JSZip from "jszip";
 import { scanImageData } from "zbar.wasm";
 import config from "./config.json";
 import { CertificateDetailsPaths } from "../constants";
+import {
+  FacebookShareButton,
+} from "react-share";
 
 // import Footer from './footer'
 // import homeBanner from './img/homebanner@2x.png'
@@ -86,6 +89,7 @@ class App extends Component {
         dose1: user.dose1hash,
         dose2: user.dose2hash,
       });
+      this.setState({colors:[]})
       if (this.state.dose1 !== "") {
         const metadataBytes = await ipfs.cat(this.state.dose1);
         var metadataStr = new TextDecoder().decode(metadataBytes);
@@ -160,6 +164,7 @@ class App extends Component {
           });
       });
     });
+    await this.loadBlockchainData();
   };
 
   onFileChange = (event) => {
@@ -450,6 +455,9 @@ class App extends Component {
           ) : (
             <></>
           )}
+          {/* <div className="row col-lg-12">
+            <FacebookShareButton url={this.state.colors[0]} quote="I just minted my first vaccine NFT tokens! Get yours today at https://vaccinft.vercel.app/"/>
+          </div> */}
           <div className="row col-lg-12">
             <canvas id="cropped-qr"></canvas>
             <img src={this.state.qr_image} />

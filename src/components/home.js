@@ -204,8 +204,7 @@ class Home extends Component {
               <div class="col-md-8 mb-8 teammate-content">
                 <h6 className="teammate-name">Anurag Hakeem</h6>
                 <p className="para-content">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Anurag is a UI/UX designer and frontend developer. He has a keen interest in blockhain and web3 technologies. He is a football fan and wantes to bring the sport into blockchain.
                 </p>
                 {/* <a href="#" className="button-primary">
                 <span>
@@ -219,12 +218,11 @@ class Home extends Component {
                 <img src={hemant}></img>
               </div>
               <div class="col-md-8 mb-8 teammate-content">
-                <h6 className="teammate-name">Hemant</h6>
+                <h6 className="teammate-name">Hemant Joshi</h6>
                 <p className="para-content">
-                  Backend Developer with interests in Blockchain and Linux. I
-                  love the concept of self-hosting and am on the lookout for new
-                  services to self-host. New tech is big YES. Currently working
-                  as SDE at McAfee.
+                  Backend Developer with interests in Blockchain and Linux. He
+                  loves the concept of self-hosting and is on the lookout for new
+                  services to self-host. New tech is big YES.
                 </p>
                 {/* <a href="#" className="button-primary">
                 <span>
