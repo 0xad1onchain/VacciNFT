@@ -7,7 +7,7 @@ import PDFJS from "pdfjs-dist/build/pdf";
 import pdfjsWorker from "pdfjs-dist/build/pdf.worker.entry";
 import JSZip from "jszip";
 import { scanImageData } from "zbar.wasm";
-import config from "../config.json";
+import config from "./config.json";
 import { CertificateDetailsPaths } from "../constants";
 
 // import Footer from './footer'
@@ -15,7 +15,9 @@ import { CertificateDetailsPaths } from "../constants";
 // import covacContract from './img/covacContract@2x.png'
 // import aditya from './img/aditya@2x.png'
 // import anurag from './img/anurag@2x.png'
-import banner from './img/about-banner@2x.png'
+import banner from "./img/about-banner@2x.png";
+
+const Portis = require("@portis/web3");
 
 export const CERTIFICATE_FILE = "certificate.json";
 
@@ -44,33 +46,26 @@ class App extends Component {
       colors: [],
       selectedFile: null,
       qr_image: null,
-      verified: true,
-      name: undefined,
-      dose: undefined,
-      certificateId: undefined,
+      verified: false,
+      name: "",
+      dose: "",
+      certificateId: "",
+      dose1: "",
+      dose2: "",
+      colors: [],
     };
   }
 
   async componentWillMount() {
-    await this.loadWeb3();
+    // await this.loadWeb3();
     await this.loadBlockchainData();
   }
 
-  async loadWeb3() {
-    if (window.ethereum) {
-      window.web3 = new Web3(window.ethereum);
-      await window.ethereum.enable();
-    } else if (window.web3) {
-      window.web3 = new Web3(window.web3.currentProvider);
-    } else {
-      window.alert(
-        "Non-Ethereum browser detected. You should consider trying MetaMask!"
-      );
-    }
-  }
-
   async loadBlockchainData() {
-    const web3 = window.web3;
+    const portis = new Portis(config.dappId, config.network, {
+      gasRelay: true,
+    });
+    const web3 = new Web3(portis.provider);
     // Load account
     const accounts = await web3.eth.getAccounts();
     this.setState({ account: accounts[0] });
@@ -91,6 +86,25 @@ class App extends Component {
         dose1: user.dose1hash,
         dose2: user.dose2hash,
       });
+      if (this.state.dose1 !== "") {
+        const metadataBytes = await ipfs.cat(this.state.dose1);
+        var metadataStr = new TextDecoder().decode(metadataBytes);
+        const metadata = JSON.parse(metadataStr);
+        console.log(metadata);
+        this.setState({
+          colors: [...this.state.colors, metadata],
+        });
+      }
+
+      if (this.state.dose2 !== "") {
+        const metadataBytes = await ipfs.cat(this.state.dose2);
+        var metadataStr = new TextDecoder().decode(metadataBytes);
+        const metadata = JSON.parse(metadataStr);
+        console.log(metadata);
+        this.setState({
+          colors: [...this.state.colors, metadata],
+        });
+      }
     } else {
       window.alert("Smart contract not deployed to detected network.");
     }
@@ -98,8 +112,7 @@ class App extends Component {
 
   mint = async () => {
     console.log(this.state);
-    if (this.state.verified !== true || this.state.certificateId === undefined)
-      return;
+    if (this.state.verified !== true || this.state.certificateId === "") return;
     const file = getSVG(this.state.name, this.state.dose);
     console.log(file);
     const fileBuffer = Buffer.from(file, "utf8");
@@ -313,7 +326,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        < div className="container-fluid mt-5 ">
+        <div className="container-fluid mt-5 ">
           <div className="row made-with-love row got-covid-shot col-lg-12">
             <h3 className="sub-title">Got Your Covid-19 Shot?</h3>
             <h2 className="title primary-title latest-token-claimed">
@@ -325,47 +338,120 @@ class App extends Component {
           </div>
           <div className="row col-lg-12 about-para">
             <p className="para-content">
-              Non fungible token celebrate the power of eternity and present us with a way to digitally store our most beloved priceless possessions.  An NFT is a digital asset that represents real-world objects like art, music, in-game items and videos. They are bought and sold online, frequently with cryptocurrency, and they are generally encoded with the same underlying software as many cryptos.
-          </p>
+              Non fungible token celebrate the power of eternity and present us
+              with a way to digitally store our most beloved priceless
+              possessions. An NFT is a digital asset that represents real-world
+              objects like art, music, in-game items and videos. They are bought
+              and sold online, frequently with cryptocurrency, and they are
+              generally encoded with the same underlying software as many
+              cryptos.
+            </p>
             <p className="para-content">
-              The COVID-19 pandemic has led to a dramatic loss of human life worldwide and presented an unprecedented challenge to public health, food systems and the world of work. The economic and social disruption caused by the pandemic has been devastating: tens of millions of people are at risk of falling into extreme poverty. Despite all the challenges the pandemic has presented, many scientific groups have come out with vaccines that will help restore normalcy in our lives.
-          </p>
+              The COVID-19 pandemic has led to a dramatic loss of human life
+              worldwide and presented an unprecedented challenge to public
+              health, food systems and the world of work. The economic and
+              social disruption caused by the pandemic has been devastating:
+              tens of millions of people are at risk of falling into extreme
+              poverty. Despite all the challenges the pandemic has presented,
+              many scientific groups have come out with vaccines that will help
+              restore normalcy in our lives.
+            </p>
             <p className="para-content">
-              Covac celebrates the brave fight humanity has put against this deadly virus and wants to store it for eternity. We want to thank every single person who has done their bit by helping as a frontline-worker, donating or staying at home to avoid the spread of virus and present them with these awesome NFT tokens which they can mint by uploading their pdf certificate of their vaccine shot.
-          </p>
+              Covac celebrates the brave fight humanity has put against this
+              deadly virus and wants to store it for eternity. We want to thank
+              every single person who has done their bit by helping as a
+              frontline-worker, donating or staying at home to avoid the spread
+              of virus and present them with these awesome NFT tokens which they
+              can mint by uploading their pdf certificate of their vaccine shot.
+            </p>
           </div>
           <div className="row col-lg-12 made-with-love">
-            <h2 className="title looks-like-no-vaccine">
-              Looks like you have not claimed any tokens yet :(
-            </h2>
-            <h3 className="sub-title register-content">Regester for your vaccine shot on <a href="https://www.cowin.gov.in/home">https://www.cowin.gov.in</a></h3>
-            <h3 className="sub-title">Got your vaccine shot?</h3>
-            <h2 className="title">
-              Claim your tokens in 1 simple step!
-            </h2>
-          </div>
-          <div className="row col-lg-12 choose-file-button">
-            {/* <input type="file" onChange={this.onFileChange} /> */}
-            <input type="file" name="file" id="file" class="inputfile" onChange={this.onFileChange}/>
-            <label for="file">Choose a file</label>
+            {(this.state.dose1 !== "" && this.state.dose2 === "") ||
+            (this.state.dose1 === "" && this.state.dose2 !== "") ? (
+              <h2 className="title looks-like-no-vaccine">
+                {`Looks like you have claimed 1 tokens so far :)`}
+              </h2>
+            ) : this.state.dose1 !== "" && this.state.dose2 !== "" ? (
+              <h2 className="title looks-like-no-vaccine">
+                {`Wow you have claimed both your tokens :)`}
+              </h2>
+            ) : (
+              <h2 className="title looks-like-no-vaccine">
+                {`Looks like you have not claimed any tokens yet :(`}
+              </h2>
+            )}
+            <h3 className="sub-title register-content">
+              Regester for your vaccine shot on{" "}
+              <a href="https://www.cowin.gov.in/home">
+                https://www.cowin.gov.in
+              </a>
+            </h3>
 
+            {this.state.dose1 === "" || this.state.dose2 === "" ? (
+              <div>
+                <h3 className="sub-title">Got your vaccine shot?</h3>
+                <h2 className="title">Claim your tokens in 1 simple step!</h2>
+              </div>
+            ) : (
+              <div>
+                <h3 className="sub-title">
+                  Great Job getting vaccinated and helping us fight COVID
+                </h3>
+                <h2 className="title">Your Claimed Tokens</h2>
+              </div>
+            )}
           </div>
-          <div className="row col-lg-12 about-buttons">
-            <button onClick={this.onFileUpload} class="upload-button">Upload!</button>
+          <div className="row text-center in-grid-375">
+            {this.state.colors.map((color, key) => {
+              return (
+                <div key={key} className="col-md-4 mb-4 nft-tokens-home">
+                  {/* <div className="token" style={{ backgroundColor: color }}></div> */}
+                  <div>
+                    <img
+                      src={`${color.properties.image.description}`}
+                      alt="NFT here"
+                      href={`${config.deployedNetworkScanner}${this.state.address}`}
+                    />
+                  </div>
+                </div>
+              );
+            })}
           </div>
-          <div className="row col-lg-12 about-buttons">
-          <button
-            onClick={this.mint}
-            className="btn btn-block btn-primary"
-            // disabled={!this.state.verified}
-            disabled={true}
-            className="mint-button"
-          >
-            Mint
-          </button>
-          </div>
+          {this.state.dose1 === "" || this.state.dose2 === "" ? (
+            <div>
+              <div className="row col-lg-12 choose-file-button">
+                {/* <input type="file" onChange={this.onFileChange} /> */}
+                <input
+                  type="file"
+                  name="file"
+                  id="file"
+                  class="inputfile"
+                  onChange={this.onFileChange}
+                />
+                <label for="file">Choose a file</label>
+              </div>
+              <div className="row col-lg-12 about-buttons">
+                <button onClick={this.onFileUpload} class="upload-button">
+                  Upload!
+                </button>
+              </div>
+              <div className="row col-lg-12 about-buttons">
+                <button
+                  onClick={this.mint}
+                  className="btn btn-block btn-primary"
+                  disabled={!this.state.verified}
+                  // disabled={true}
+                  className="mint-button"
+                >
+                  Mint
+                </button>
+              </div>
+            </div>
+          ) : (
+            <></>
+          )}
           <div className="row col-lg-12">
-          <canvas id="cropped-qr"></canvas>
+            <canvas id="cropped-qr"></canvas>
             <img src={this.state.qr_image} />
             <img src={this.state.qr_image} />
             <canvas display="none" id="the-canvas"></canvas>
@@ -396,8 +482,8 @@ class App extends Component {
           <hr />
         </div>
         <canvas display="none" id="the-canvas"></canvas> */}
-      </ div>
-      </ div>
+        </div>
+      </div>
     );
   }
 }

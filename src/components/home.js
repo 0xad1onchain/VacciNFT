@@ -10,6 +10,8 @@ import aditya from "./img/aditya@2x.png";
 import anurag from "./img/anurag@2x.png";
 import hemant from "./img/hemant@2x.png";
 
+const Portis = require("@portis/web3");
+
 const IPFS = require("ipfs-api");
 const ipfs = new IPFS({
   host: "ipfs.infura.io",
@@ -30,25 +32,26 @@ class Home extends Component {
   }
 
   async componentWillMount() {
-    await this.loadWeb3();
+    // await this.loadWeb3();
     await this.loadBlockchainData();
   }
 
-  async loadWeb3() {
-    if (window.ethereum) {
-      window.web3 = new Web3(window.ethereum);
-      await window.ethereum.enable();
-    } else if (window.web3) {
-      window.web3 = new Web3(window.web3.currentProvider);
-    } else {
-      window.alert(
-        "Non-Ethereum browser detected. You should consider trying MetaMask!"
-      );
-    }
-  }
+  // async loadWeb3() {
+  //   if (window.ethereum) {
+  //     window.web3 = new Web3(window.ethereum);
+  //     await window.ethereum.enable();
+  //   } else if (window.web3) {
+  //     window.web3 = new Web3(window.web3.currentProvider);
+  //   } else {
+  //     window.alert(
+  //       "Non-Ethereum browser detected. You should consider trying MetaMask!"
+  //     );
+  //   }
+  // }
 
   async loadBlockchainData() {
-    const web3 = window.web3;
+    const portis = new Portis(config.dappId, config.network);
+    const web3 = new Web3(portis.provider);
     // Load account
     const accounts = await web3.eth.getAccounts();
     this.setState({ account: accounts[0] });
@@ -105,9 +108,9 @@ class Home extends Component {
                 mint their own NFT tokens after they get their vaccine shots.
               </p>
               {/* <a href="#" className="button-primary"> */}
-                <Link to="/tokens" className="button-primary">
-                  <span>Claim my tokens now</span>
-                </Link>
+              <Link to="/tokens" className="button-primary">
+                <span>Claim my tokens now</span>
+              </Link>
               {/* </a> */}
             </div>
           </div>
@@ -159,7 +162,7 @@ class Home extends Component {
               {/* <a href="#" className="button-secondary-outline"> */}
               <Link to="/tokens" className="button-secondary-outline">
                 <span>Claim my tokens</span>
-                </Link>
+              </Link>
               {/* </a> */}
             </div>
             <div class="col-md-6 mb-6 what-is-covac">
