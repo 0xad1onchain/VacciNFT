@@ -31,6 +31,7 @@ class Navbar extends Component {
       console.log(accounts[0]);
     } else if (window.web3) {
       window.web3 = new Web3(window.web3.currentProvider);
+      const web3 = window.web3;
       const accounts = await web3.eth.getAccounts();
       this.setState({ account: accounts[0] });
       console.log(accounts[0]);
