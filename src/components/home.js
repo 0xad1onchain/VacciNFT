@@ -141,6 +141,7 @@ class Home extends Component {
             <a
               href={`${config.deployedNetworkScanner}${this.state.address}`}
               className="button-primary"
+              target="_blank"
             >
               <span>See All!</span>
             </a>

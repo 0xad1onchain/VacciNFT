@@ -368,19 +368,19 @@ class App extends Component {
           <div className="row col-lg-12 made-with-love">
             {(this.state.dose1 !== "" && this.state.dose2 === "") ||
             (this.state.dose1 === "" && this.state.dose2 !== "") ? (
-              <h2 className="title looks-like-no-vaccine">
+              <h2 className="title looks-like-no-vaccine center-aligned">
                 {`Looks like you have claimed 1 tokens so far :)`}
               </h2>
             ) : this.state.dose1 !== "" && this.state.dose2 !== "" ? (
-              <h2 className="title looks-like-no-vaccine">
+              <h2 className="title looks-like-no-vaccine center-aligned">
                 {`Wow you have claimed both your tokens :)`}
               </h2>
             ) : (
-              <h2 className="title looks-like-no-vaccine">
+              <h2 className="title looks-like-no-vaccine center-aligned">
                 {`Looks like you have not claimed any tokens yet :(`}
               </h2>
             )}
-            <h3 className="sub-title register-content">
+            <h3 className="sub-title register-content center-aligned">
               Regester for your vaccine shot on{" "}
               <a href="https://www.cowin.gov.in/home">
                 https://www.cowin.gov.in
@@ -389,22 +389,22 @@ class App extends Component {
 
             {this.state.dose1 === "" || this.state.dose2 === "" ? (
               <div>
-                <h3 className="sub-title">Got your vaccine shot?</h3>
-                <h2 className="title">Claim your tokens in 1 simple step!</h2>
+                <h3 className="sub-title center-aligned">Got your vaccine shot?</h3>
+                <h2 className="title center-aligned">Claim your tokens in 1 simple step!</h2>
               </div>
             ) : (
               <div>
-                <h3 className="sub-title">
+                <h3 className="sub-title center-aligned">
                   Great Job getting vaccinated and helping us fight COVID
                 </h3>
-                <h2 className="title">Your Claimed Tokens</h2>
+                <h2 className="title center-aligned">Your Claimed Tokens:</h2>
               </div>
             )}
           </div>
           <div className="row text-center in-grid-375">
             {this.state.colors.map((color, key) => {
               return (
-                <div key={key} className="col-md-4 mb-4 nft-tokens-home">
+                <div key={key} className="col-md-6 mb-6 nft-tokens-home nft-tokens-about">
                   {/* <div className="token" style={{ backgroundColor: color }}></div> */}
                   <div>
                     <img

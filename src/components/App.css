@@ -156,6 +156,9 @@
 .nft-tokens-home{
   padding: 50px;
 }
+.nft-tokens-about{
+  padding: 75px;
+}
 
 .team-image{
   justify-content: flex-end;
@@ -444,3 +447,6 @@
   background-color: red;
 } */
 
+.center-aligned{
+  text-align: center;
+}
