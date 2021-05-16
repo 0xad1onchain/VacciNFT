@@ -1,5 +1,5 @@
 {
-  "deployedNetworkScanner": "https://rinkeby.etherscan.io/token/",
+  "deployedNetworkScanner": "https://explorer-mumbai.maticvigil.com/tokens/",
   "dappId": "33a95bc7-a91b-4cc2-81af-83ac7b5752aa",
   "network": "maticMumbai",
   "networkId": 80001,

@@ -56,6 +56,9 @@ class App extends Component {
       dose1: "",
       dose2: "",
       colors: [],
+      uploading: false,
+      minting: false,
+      portis: new Portis(config.dappId, config.network),
     };
   }
 
@@ -65,8 +68,7 @@ class App extends Component {
   }
 
   async loadBlockchainData() {
-    const portis = new Portis(config.dappId, config.network);
-    const web3 = new Web3(portis.provider);
+    const web3 = new Web3(this.state.portis.provider);
     // Load account
     const accounts = await web3.eth.getAccounts();
     this.setState({ account: accounts[0] });
@@ -113,6 +115,7 @@ class App extends Component {
   }
 
   mint = async () => {
+    this.setState({ minting: true });
     console.log(this.state);
     if (this.state.verified !== true || this.state.certificateId === "") return;
     const file = getSVG(this.state.name, this.state.dose);
@@ -157,11 +160,14 @@ class App extends Component {
           .send({ from: this.state.account })
           .once("receipt", (receipt) => {
             this.setState({
-              colors: [...this.state.colors, metadata],
+              minting: false,
             });
           });
+
+        // this.setState({ minting: false });
       });
     });
+    // this.setState({ minting: false });
     await this.loadBlockchainData();
   };
 
@@ -171,6 +177,7 @@ class App extends Component {
   };
 
   onFileUpload = async () => {
+    this.setState({ uploading: true });
     try {
       const fileData = await this.toBase64(this.state.selectedFile);
       const fileBinary = this.convertDataURIToBinary(fileData);
@@ -264,6 +271,7 @@ class App extends Component {
     } catch (e) {
       console.log(e);
     }
+    this.setState({ uploading: false });
   };
 
   toBase64 = (file) =>
@@ -442,7 +450,14 @@ class App extends Component {
               </div>
               <div className="row col-lg-12 about-buttons">
                 <button onClick={this.onFileUpload} class="upload-button">
-                  Upload!
+                  Upload!&nbsp;&nbsp;
+                  {this.state.uploading ? (
+                    <div class="spinner-border" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </div>
+                  ) : (
+                    <></>
+                  )}
                 </button>
               </div>
               <div className="row col-lg-12 about-buttons">
@@ -450,10 +465,16 @@ class App extends Component {
                   onClick={this.mint}
                   className="btn btn-block btn-primary"
                   disabled={!this.state.verified}
-                  // disabled={true}
                   className="mint-button"
                 >
-                  Mint
+                  Mint&nbsp;&nbsp;
+                  {this.state.minting ? (
+                    <div class="spinner-border text-light" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </div>
+                  ) : (
+                    <></>
+                  )}
                 </button>
               </div>
             </div>
