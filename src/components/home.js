@@ -204,7 +204,7 @@ class Home extends Component {
               <div class="col-md-8 mb-8 teammate-content">
                 <h6 className="teammate-name">Anurag Hakeem</h6>
                 <p className="para-content">
-                  Anurag is a UI/UX designer and frontend developer. He has a keen interest in blockhain and web3 technologies. He is a football fan and wantes to bring the sport into blockchain.
+                  Anurag is a UI/UX designer and frontend developer. He has a keen interest in blockhain and web3 technologies. He is a football fan and wants to bring the sport into blockchain.
                 </p>
                 {/* <a href="#" className="button-primary">
                 <span>
