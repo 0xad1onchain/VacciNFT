@@ -20,7 +20,7 @@ import { CertificateDetailsPaths } from "../constants";
 // import anurag from './img/anurag@2x.png'
 import banner from "./img/about-banner@2x.png";
 
-const Portis = require("@portis/web3");
+// const Portis = require("@portis/web3");
 
 export const CERTIFICATE_FILE = "certificate.json";
 
@@ -58,17 +58,30 @@ class App extends Component {
       colors: [],
       uploading: false,
       minting: false,
-      portis: new Portis(config.dappId, config.network),
+      // portis: new Portis(config.dappId, config.network),
     };
   }
 
   async componentWillMount() {
-    // await this.loadWeb3();
+    await this.loadWeb3();
     await this.loadBlockchainData();
   }
 
+  async loadWeb3() {
+    if (window.ethereum) {
+      window.web3 = new Web3(window.ethereum);
+      await window.ethereum.enable();
+    } else if (window.web3) {
+      window.web3 = new Web3(window.web3.currentProvider);
+    } else {
+      window.alert(
+        "Non-Ethereum browser detected. You should consider trying MetaMask!"
+      );
+    }
+  }
+
   async loadBlockchainData() {
-    const web3 = new Web3(this.state.portis.provider);
+    const web3 = window.web3;
     // Load account
     const accounts = await web3.eth.getAccounts();
     this.setState({ account: accounts[0] });

@@ -10,7 +10,7 @@ import aditya from "./img/aditya@2x.png";
 import anurag from "./img/anurag@2x.png";
 import hemant from "./img/hemant@2x.png";
 
-const Portis = require("@portis/web3");
+// const Portis = require("@portis/web3");
 
 const IPFS = require("ipfs-api");
 const ipfs = new IPFS({
@@ -32,26 +32,25 @@ class Home extends Component {
   }
 
   async componentWillMount() {
-    // await this.loadWeb3();
+    await this.loadWeb3();
     await this.loadBlockchainData();
   }
 
-  // async loadWeb3() {
-  //   if (window.ethereum) {
-  //     window.web3 = new Web3(window.ethereum);
-  //     await window.ethereum.enable();
-  //   } else if (window.web3) {
-  //     window.web3 = new Web3(window.web3.currentProvider);
-  //   } else {
-  //     window.alert(
-  //       "Non-Ethereum browser detected. You should consider trying MetaMask!"
-  //     );
-  //   }
-  // }
+  async loadWeb3() {
+    if (window.ethereum) {
+      window.web3 = new Web3(window.ethereum);
+      await window.ethereum.enable();
+    } else if (window.web3) {
+      window.web3 = new Web3(window.web3.currentProvider);
+    } else {
+      window.alert(
+        "Non-Ethereum browser detected. You should consider trying MetaMask!"
+      );
+    }
+  }
 
   async loadBlockchainData() {
-    const portis = new Portis(config.dappId, config.network);
-    const web3 = new Web3(portis.provider);
+    const web3 = window.web3;
     // Load account
     const accounts = await web3.eth.getAccounts();
     this.setState({ account: accounts[0] });
@@ -204,7 +203,9 @@ class Home extends Component {
               <div class="col-md-8 mb-8 teammate-content">
                 <h6 className="teammate-name">Anurag Hakeem</h6>
                 <p className="para-content">
-                  Anurag is a UI/UX designer and frontend developer. He has a keen interest in blockhain and web3 technologies. He is a football fan and wants to bring the sport into blockchain.
+                  Anurag is a UI/UX designer and frontend developer. He has a
+                  keen interest in blockhain and web3 technologies. He is a
+                  football fan and wants to bring the sport into blockchain.
                 </p>
                 {/* <a href="#" className="button-primary">
                 <span>
@@ -221,8 +222,8 @@ class Home extends Component {
                 <h6 className="teammate-name">Hemant Joshi</h6>
                 <p className="para-content">
                   Backend Developer with interests in Blockchain and Linux. He
-                  loves the concept of self-hosting and is on the lookout for new
-                  services to self-host. New tech is big YES.
+                  loves the concept of self-hosting and is on the lookout for
+                  new services to self-host. New tech is big YES.
                 </p>
                 {/* <a href="#" className="button-primary">
                 <span>
